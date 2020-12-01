@@ -57,15 +57,5 @@ def test_QCBM(benchmark, nqubits):
     benchmark.group = "QCBM"
     pairs = [(i, (i + 1) % nqubits) for i in range(nqubits)]
     circuit = build_circuit(nqubits, 9, pairs)
-    state = np.zeros(2**nqubits, dtype=complex)
-    state[0] = 1
-    benchmark(circuit, state)
+    benchmark(circuit)
 
-# @pytest.mark.parametrize('nqubits', nqubits_list)
-# @pytest.mark.parametrize('nqubits', nqubits_list)
-# def test_QCBM_CUDA(benchmark, nqubits):
-#     benchmark.group = "QCBM (cuda)"
-#     pairs = [(i, (i + 1) % nqubits) for i in range(nqubits)]
-#     circuit = build_circuit(nqubits, 9, pairs)
-#     st = QuantumStateGpu(nqubits)
-#     benchmark(circuit.update_quantum_state, st)

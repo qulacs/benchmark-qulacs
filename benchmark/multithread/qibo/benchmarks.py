@@ -1,6 +1,6 @@
 import tensorflow as tf
-tf.config.threading.set_inter_op_parallelism_threads(24)
-tf.config.threading.set_intra_op_parallelism_threads(24)
+# tf.config.threading.set_inter_op_parallelism_threads(24)
+# tf.config.threading.set_intra_op_parallelism_threads(24)
 
 import qibo
 qibo.set_precision("double")
@@ -45,21 +45,23 @@ def build_circuit(nqubits, depth, pairs):
     last_rotation(circuit, nqubits)
     return circuit
 
+def execute_with_opt(circuit):
+    circuit.compile()
+    circuit()
 
 @pytest.mark.parametrize('nqubits', nqubits_list)
 def test_QCBM(benchmark, nqubits):
     benchmark.group = "QCBM"
     pairs = [(i, (i + 1) % nqubits) for i in range(nqubits)]
     circuit = build_circuit(nqubits, 9, pairs)
-    state = np.zeros(2**nqubits, dtype=complex)
-    state[0]=1
-    benchmark(circuit, state)
+    benchmark(circuit)
 
-# @pytest.mark.parametrize('nqubits', nqubits_list)
-# @pytest.mark.parametrize('nqubits', nqubits_list)
-# def test_QCBM_CUDA(benchmark, nqubits):
-#     benchmark.group = "QCBM (cuda)"
-#     pairs = [(i, (i + 1) % nqubits) for i in range(nqubits)]
-#     circuit = build_circuit(nqubits, 9, pairs)
-#     st = QuantumStateGpu(nqubits)
-#     benchmark(circuit.update_quantum_state, st)
+"""
+@pytest.mark.parametrize('nqubits', nqubits_list)
+def test_QCBM_opt(benchmark, nqubits):
+    benchmark.group = "QCBMopt"
+    pairs = [(i, (i + 1) % nqubits) for i in range(nqubits)]
+    circuit = build_circuit(nqubits, 9, pairs)
+    benchmark(execute_with_opt, circuit)
+"""
+
