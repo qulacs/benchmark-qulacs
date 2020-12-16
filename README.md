@@ -49,6 +49,8 @@ Libraries
 |[qxelarator](https://github.com/QE-Lab/qx-simulator/tree/develop/qxelarator)|0.3.0|
 |[Yao](https://github.com/QuantumBFS/Yao.jl)|0.6.3|
 
+## Requirement
+You need to install ``` pytest ``` and ``` pytest-benchmark``` via pip
 ## Result
 
 ### Single thread 
