@@ -43,7 +43,7 @@ Libraries
 |[Intel-QS](https://github.com/iqusoft/intel-qs)|[latest master](https://github.com/iqusoft/intel-qs/tree/b625e1fb09c5aa3c146cb7129a2a29cdb6ff186a)|Installed with DIqsNative=ON|
 |[ProjectQ](https://github.com/ProjectQ-Framework/ProjectQ)|0.5.1|
 |[PyQuEST-cffi](https://github.com/HQSquantumsimulations/PyQuEST-cffi)|3.2.3.1|
-|[Qibo](https://github.com/Quantum-TII/qibo)|0.1.1||
+|[Qibo](https://github.com/Quantum-TII/qibo)|0.1.2||
 |[Qiskit-Aer(-gpu)](https://github.com/Qiskit/qiskit-aer)|0.7.1|Time for `backend._controller(qobj)` is evaluated|
 |[Qulacs](https://github.com/qulacs/qulacs)|0.2.0|
 |[qxelarator](https://github.com/QE-Lab/qx-simulator/tree/develop/qxelarator)|0.3.0|

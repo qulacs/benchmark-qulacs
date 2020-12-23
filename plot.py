@@ -60,9 +60,8 @@ def load(folder_name):
     return dat
 
 
-def plot(dat, save_name):
+def plot(dat):
     cmap = plt.get_cmap("tab10")
-    plt.figure(figsize=(12, 6))
     cnt = 0
     for ind, name in enumerate(liblist):
         hit = [dname for dname in dat.keys() if dname.startswith(name)]
@@ -100,18 +99,12 @@ def plot(dat, save_name):
     plt.ylabel("Time [sec]", fontsize=16)
     plt.xticks(fontsize=16)
     plt.yticks(fontsize=16)
-    plt.legend(fontsize=10, bbox_to_anchor=(1.05, 1.0))
-    plt.tight_layout()
-    plt.savefig("./image/" + save_name)
-    # plt.show()
-    plt.clf()
 
 
-def plot_ratio(dat, save_name):
+def plot_ratio(dat):
     fil = np.array(list(dat["qulacs"].items())).T
     base = fil[1]
     cmap = plt.get_cmap("tab10")
-    plt.figure(figsize=(12, 6))
     cnt = 0
     for ind, name in enumerate(liblist):
         hit = [dname for dname in dat.keys() if dname.startswith(name)]
@@ -149,17 +142,36 @@ def plot_ratio(dat, save_name):
     plt.ylabel("Time (relative to Qulacs)", fontsize=16)
     plt.xticks(fontsize=16)
     plt.yticks(fontsize=16)
-    plt.legend(fontsize=10, bbox_to_anchor=(1.05, 1.0))
-    plt.tight_layout()
-    plt.savefig("./image/" + save_name)
-    # plt.show()
-    plt.clf()
 
 
 if __name__ == "__main__":
     for folder in ["singlethread", "multithread", "gpu"]:
         dat = load(folder)
-        plot(dat, f"fig_compare_{folder}.pdf")
-        plot_ratio(dat, f"fig_ratio_{folder}.pdf")
-        plot(dat, f"fig_compare_{folder}.png")
-        plot_ratio(dat, f"fig_ratio_{folder}.png")
+
+        plt.figure(figsize=(12, 6))
+        plot(dat)
+        plt.legend(fontsize=10, bbox_to_anchor=(1.05, 1.0))
+        plt.tight_layout()
+        plt.savefig(f"./image/fig_compare_{folder}.pdf")
+        plt.savefig(f"./image/fig_compare_{folder}.png")
+        plt.clf()
+
+        plt.figure(figsize=(12, 6))
+        plot_ratio(dat)
+        plt.legend(fontsize=10, bbox_to_anchor=(1.05, 1.0))
+        plt.tight_layout()
+        plt.savefig(f"./image/fig_ratio_{folder}.pdf")
+        plt.savefig(f"./image/fig_ratio_{folder}.png")
+        plt.clf()
+
+        plt.figure(figsize=(12, 6))
+        plt.subplot(1, 2, 1)
+        plot(dat)
+        plt.legend(fontsize=10, loc="upper left")
+        plt.subplot(1, 2, 2)
+        plot_ratio(dat)
+        plt.legend(fontsize=10, loc="upper right")
+        plt.tight_layout()
+        plt.savefig(f"./image/fig_both_{folder}.pdf")
+        plt.savefig(f"./image/fig_both_{folder}.png")
+        plt.clf()
